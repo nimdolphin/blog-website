@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import Post from "../pages/Post";
-import Posts from "../pages/Posts";
-import LogIn from "../pages/LogIn";
-import SignIn from "../pages/SignIn";
+import PostPage from "../pages/PostPage";
+import PostsPage from "../pages/PostsPage";
+import LoginPage from "../pages/LoginPage";
+import SignInPage from "../pages/SignInPage";
 
 export const PATHS = {
   POSTS: "/",
@@ -13,9 +13,9 @@ export const PATHS = {
 
 export const router = () => (
   <Routes>
-    <Route path={PATHS.POSTS} element={<Posts />} />
-    <Route path={PATHS.NESTED_POST} element={<Post />} />
-    <Route path={PATHS.LOGIN} element={<LogIn />} />
-    <Route path={PATHS.SIGNIN} element={<SignIn />} />
+    <Route path={PATHS.POSTS} element={<PostsPage />} />
+    <Route path={PATHS.NESTED_POST} element={<PostPage />} />
+    <Route path={PATHS.LOGIN} element={<LoginPage />} />
+    <Route path={PATHS.SIGNIN} element={<SignInPage />} />
   </Routes>
 );
