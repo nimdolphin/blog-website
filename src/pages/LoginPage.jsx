@@ -1,6 +1,6 @@
 const LoginPage = () => {
   return (
-    <div className="navPage">
+    <div>
       <p>LogIn</p>
     </div>
   );
