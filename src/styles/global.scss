@@ -1,0 +1,12 @@
+$fontPath: "../assets/fonts/";
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("#{$fontPath}WorkSans-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+}
