@@ -1,7 +1,9 @@
+import AuthorInfo from "../components/AuthorInfo";
+
 const PostsPage = () => {
   return (
     <div>
-      <p>Posts</p>
+      <AuthorInfo />
     </div>
   );
 };
