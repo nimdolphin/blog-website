@@ -1,13 +1,15 @@
 .author-container {
   background-color: #f6f6f7;
   height: 344px;
+  width: 1216px;
   border-radius: 12px;
   padding: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 16px 120px;
+  box-sizing: border-box;
+  margin: 20px 120px;
 
   .author-details {
     color: #3b3c4a;
