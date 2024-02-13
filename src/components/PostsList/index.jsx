@@ -3,7 +3,7 @@ import axios from "axios";
 import Post from "../Post";
 
 const PostsList = () => {
-  const [post, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,9 +19,29 @@ const PostsList = () => {
   }, []);
 
   return (
-    <>
-      <Post data={post} />
-    </>
+    <ul className="list-posts">
+      {posts.map(
+        ({
+          id,
+          title,
+          category,
+          content_text,
+          created_at,
+          description,
+          photo_url,
+        }) => (
+          <Post
+            id={id}
+            title={title}
+            category={category}
+            contentText={content_text}
+            createdAt={created_at}
+            description={description}
+            photoUrl={photo_url}
+          />
+        )
+      )}
+    </ul>
   );
 };
 
