@@ -33,7 +33,7 @@ const Post = ({ data }) => {
     </ul>
   );
 
-  return <>{onePost};</>;
+  return <>{onePost}</>;
 };
 
 export default Post;
