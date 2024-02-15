@@ -1,0 +1,13 @@
+.input-form {
+  border-radius: 6px;
+  width: 310px;
+  min-height: 48px;
+  border: 1px solid #dcdddf;
+  outline: none;
+  padding-left: 5px;
+}
+
+.input-form::placeholder {
+  font-size: 16px;
+  font-family: "Work Sans", sans-serif;
+}

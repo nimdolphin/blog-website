@@ -31,7 +31,7 @@ const PostsList = () => {
           photo_url,
         }) => (
           <Post
-            id={id}
+            key={id}
             title={title}
             category={category}
             contentText={content_text}

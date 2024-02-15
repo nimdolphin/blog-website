@@ -2,7 +2,6 @@ import { getDateMonthYearDate } from "../../utils/date";
 import "./styles.scss";
 
 const Post = ({
-  id,
   title,
   category,
   contentText,
@@ -11,7 +10,7 @@ const Post = ({
   photoUrl,
 }) => {
   return (
-    <li key={id} className="list-item">
+    <li className="list-item">
       <img className="post-photo" src={photoUrl} alt="postPhoto" />
       <h1 className="title">{title}</h1>
       <p className="description">{description}</p>
