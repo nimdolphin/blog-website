@@ -1,24 +1,14 @@
-import { useState } from "react";
 import "./styles.scss";
 
-const Input = ({ placeholder, type }) => {
-  const [email, setEmail] = useState("");
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-
+const Input = ({ placeholder, type, value, onChange }) => {
   return (
-    <form>
-      <input
-        className="input-form"
-        type={type}
-        placeholder={placeholder}
-        value={email}
-        onChange={handleChange}
-      />
-    </form>
+    <input
+      className="input-form"
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
   );
 };
 

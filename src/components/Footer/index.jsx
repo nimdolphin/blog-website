@@ -1,6 +1,6 @@
-import Input from "../Input";
-import Button from "../Button";
-import Envelope from "../../assets/img/Envelope.png";
+// import Input from "../Input";
+// import Button from "../Button";
+// import Envelope from "../../assets/img/Envelope.png";
 import "./styles.scss";
 
 const Footer = () => {
@@ -56,15 +56,18 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className="input">
-          <h1 className="input-title">Weekly Newsletter</h1>
-          <p className="input-text">Get blog articles and offers via email</p>
+        {/* <div className="input">
           <div className="input-with-logo">
             <img className="envelope" src={Envelope} alt="envelope" />
-            <Input placeholder="Your Email" type="text" />
+            <Input
+              placeholder="Your Email"
+              type="text"
+              onChange={handleChange}
+              value={value}
+            />
           </div>
-          <Button label="Subscribe" />
-        </div>
+          <Button label="Subscribe" width={320} />
+        </div> */}
       </div>
 
       <div className="bottom-c">
