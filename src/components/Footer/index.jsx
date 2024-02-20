@@ -1,6 +1,3 @@
-// import Input from "../Input";
-// import Button from "../Button";
-// import Envelope from "../../assets/img/Envelope.png";
 import "./styles.scss";
 
 const Footer = () => {
@@ -23,7 +20,6 @@ const Footer = () => {
             </p>
           </div>
         </div>
-
         <div className="quick-link">
           <h1 className="about-title">Quick Link</h1>
           <a href="#" className="quick-page">
@@ -39,7 +35,6 @@ const Footer = () => {
             Contact
           </a>
         </div>
-
         <div className="category-link">
           <h1 className="about-title">Category</h1>
           <a href="#" className="quick-category">
@@ -55,21 +50,7 @@ const Footer = () => {
             Sports
           </a>
         </div>
-
-        {/* <div className="input">
-          <div className="input-with-logo">
-            <img className="envelope" src={Envelope} alt="envelope" />
-            <Input
-              placeholder="Your Email"
-              type="text"
-              onChange={handleChange}
-              value={value}
-            />
-          </div>
-          <Button label="Subscribe" width={320} />
-        </div> */}
       </div>
-
       <div className="bottom-c">
         <p className="bottom-c-footer">
           © JS Template 2023. All Rights Reserved.
