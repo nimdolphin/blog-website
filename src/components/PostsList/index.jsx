@@ -18,7 +18,6 @@ const PostsList = () => {
       .then((response) => dispatch(postsFetched(response.data?.blogs)))
       .catch((error) => console.log(error));
   }, [dispatch]);
-  console.log(posts);
 
   return (
     <ul className="list-posts">
