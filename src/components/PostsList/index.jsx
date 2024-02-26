@@ -1,26 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postsFetched } from "../../store/actions";
 import axios from "axios";
 import Post from "../Post";
 
 const PostsList = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts } = useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(postsFetched());
     axios
       .get(
         "https://api.slingacademy.com/v1/sample-data/blog-posts?offset=5&limit=30"
       )
-      .then((response) => {
-        setPosts(response.data?.blogs);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+      .then((response) => dispatch(postsFetched(response.data?.blogs)))
+      .catch((error) => console.log(error));
+  }, [dispatch]);
+  console.log(posts);
 
   return (
     <ul className="list-posts">
-      {posts.map(
+      {posts?.map(
         ({
           id,
           title,
