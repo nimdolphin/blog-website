@@ -1,6 +1,6 @@
 export const postsFetched = (posts) => {
   return {
-    type: "POSTS_FETCHED",
+    type: "SET_POSTS",
     payload: posts,
   };
 };
