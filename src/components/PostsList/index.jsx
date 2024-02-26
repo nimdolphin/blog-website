@@ -10,14 +10,13 @@ const PostsList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postsFetched());
     axios
       .get(
         "https://api.slingacademy.com/v1/sample-data/blog-posts?offset=5&limit=30"
       )
       .then((response) => dispatch(postsFetched(response.data?.blogs)))
       .catch((error) => console.log(error));
-  }, [dispatch]);
+  }, []);
 
   return (
     <ul className="list-posts">
