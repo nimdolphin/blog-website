@@ -1,27 +1,36 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postsFetched } from "../../store/actions";
 import axios from "axios";
 import Post from "../Post";
+import Loader from "../Loader";
 
 const PostsList = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const { posts } = useSelector((state) => state.posts);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(
         "https://api.slingacademy.com/v1/sample-data/blog-posts?offset=5&limit=30"
       )
-      .then((response) => dispatch(postsFetched(response.data.blogs)))
-      .catch((error) => console.log(error));
+      .then(
+        (response) => dispatch(postsFetched(response.data.blogs)),
+        setIsLoading(false)
+      )
+      .catch((error) => console.log(error), setIsLoading(false));
   }, []);
 
   return (
     <ul className="list-posts">
-      {!posts || !posts.length ? (
-        <p>There are no posts</p>
+      {isLoading || !posts.length ? (
+        <p>
+          <Loader />
+        </p>
       ) : (
         posts?.map(
           ({
