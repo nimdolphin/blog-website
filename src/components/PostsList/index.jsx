@@ -18,20 +18,21 @@ const PostsList = () => {
       .get(
         "https://api.slingacademy.com/v1/sample-data/blog-posts?offset=5&limit=30"
       )
-      .then(
-        (response) => dispatch(postsFetched(response.data.blogs)),
-        setIsLoading(false)
-      )
-      .catch((error) => console.log(error), setIsLoading(false))
+      .then((response) => dispatch(postsFetched(response.data.blogs)))
+      .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <ul className="list-posts">
-      {isLoading && <Loader />}
-      {!isLoading && !posts?.length ? (
-        <p>There are no posts</p>
-      ) : (
+      {isLoading && (
+        <p>
+          <Loader />
+        </p>
+      )}
+      {!isLoading && !posts?.length && <p>No posts found</p>}
+      {!isLoading &&
+        posts?.length &&
         posts?.map(
           ({
             id,
@@ -52,8 +53,7 @@ const PostsList = () => {
               photoUrl={photo_url}
             />
           )
-        )
-      )}
+        )}
     </ul>
   );
 };
