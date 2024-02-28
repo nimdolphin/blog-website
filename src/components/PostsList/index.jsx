@@ -25,15 +25,11 @@ const PostsList = () => {
 
   return (
     <ul className="list-posts">
-      {isLoading && (
-        <p>
-          <Loader />
-        </p>
-      )}
+      {isLoading && <Loader />}
       {!isLoading && !posts?.length && <p>No posts found</p>}
       {!isLoading &&
         posts?.length &&
-        posts?.map(
+        posts.map(
           ({
             id,
             title,
