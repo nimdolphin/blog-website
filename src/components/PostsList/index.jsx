@@ -22,15 +22,15 @@ const PostsList = () => {
         (response) => dispatch(postsFetched(response.data.blogs)),
         setIsLoading(false)
       )
-      .catch((error) => console.log(error), setIsLoading(false));
+      .catch((error) => console.log(error), setIsLoading(false))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <ul className="list-posts">
-      {isLoading || !posts.length ? (
-        <p>
-          <Loader />
-        </p>
+      {isLoading && <Loader />}
+      {!isLoading && !posts?.length ? (
+        <p>There are no posts</p>
       ) : (
         posts?.map(
           ({
