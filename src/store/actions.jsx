@@ -4,3 +4,10 @@ export const postsFetched = (posts) => {
     payload: posts,
   };
 };
+
+export const addPost = (newPost) => {
+  return {
+    type: "ADD_POST",
+    payload: newPost,
+  };
+};

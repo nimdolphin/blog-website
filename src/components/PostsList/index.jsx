@@ -9,7 +9,6 @@ const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { posts } = useSelector((state) => state.posts);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,17 +29,19 @@ const PostsList = () => {
       {!isLoading &&
         posts?.length &&
         posts.map(
-          ({
-            id,
-            title,
-            category,
-            content_text,
-            created_at,
-            description,
-            photo_url,
-          }) => (
+          (
+            {
+              title,
+              category,
+              content_text,
+              created_at,
+              description,
+              photo_url,
+            },
+            idx
+          ) => (
             <Post
-              key={id}
+              key={idx}
               title={title}
               category={category}
               contentText={content_text}
