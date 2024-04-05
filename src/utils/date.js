@@ -5,3 +5,7 @@ export const getDateMonthYearDate = (date) => {
 
   return fullDate;
 };
+
+export const newDate = (today) => {
+  return today.toISOString();
+};
