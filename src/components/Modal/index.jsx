@@ -1,16 +1,16 @@
+import { useState, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../store/actions";
-import { useRef } from "react";
-import { useState } from "react";
+import { TAGS } from "../../data";
 import Button from "../Button";
-import Input from "../Input";
 import CategoryTag from "../CategoryTag";
+import Input from "../Input";
 import Popup from "../Popup";
 import "./styles.scss";
 
 const Modal = ({ onClose, onClick }) => {
-  const [tag, setTag] = useState("");
+  const [tags, setTag] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   const inputTitleRef = useRef();
@@ -27,7 +27,13 @@ const Modal = ({ onClose, onClick }) => {
 
   const onClickCategory = (event) => {
     const value = event.target.getAttribute("data-value");
-    setTag(value);
+
+    if (tags.includes(value)) {
+      setTag(tags.filter((tag) => tag !== value));
+    } else {
+      setTag([...tags, value]);
+    }
+    console.log(value);
   };
 
   const onSubmit = (data) => {
@@ -36,7 +42,7 @@ const Modal = ({ onClose, onClick }) => {
     const newData = {
       ...data,
       photo_url: null,
-      category: tag,
+      category: tags.join(", "),
     };
     dispatch(addPost(newData));
   };
@@ -45,13 +51,7 @@ const Modal = ({ onClose, onClick }) => {
     <div className="modal-container">
       <div className="modal">
         <div className="closer-btn">
-          <Button
-            className="modal-close"
-            onClick={onClose}
-            label="&#10006;"
-            type="type"
-            width={20}
-          />
+          <Button onClick={onClose} label="&#10006;" type="button" width={20} />
         </div>
 
         {isPopupOpen ? (
@@ -71,10 +71,13 @@ const Modal = ({ onClose, onClick }) => {
                   width={400}
                   height={50}
                   ref={inputTitleRef}
-                  borderColor={errors.title ? "red" : "#dcdddf"}
+                  isError={errors.title}
                 />
               )}
             />
+            {errors.title && (
+              <div style={{ color: "red" }}>{errors.title.message}</div>
+            )}
             <Controller
               control={control}
               name="description"
@@ -89,10 +92,13 @@ const Modal = ({ onClose, onClick }) => {
                   width={400}
                   height={50}
                   ref={inputSubtitleRef}
-                  borderColor={errors.description ? "red" : "#dcdddf"}
+                  isError={errors.description}
                 />
               )}
             />
+            {errors.description && (
+              <div style={{ color: "red" }}>{errors.description.message}</div>
+            )}
             <textarea
               {...register("content_text", {
                 required: "You need to write a post!",
@@ -102,42 +108,20 @@ const Modal = ({ onClose, onClick }) => {
               placeholder="Write a new post..."
               style={{ borderColor: errors.content_text ? "red" : "#dcdddf" }}
             />
-            <div className="categoryTag">
-              <CategoryTag
-                dataValue="love"
-                onClick={onClickCategory}
-                text="love"
-                tag={tag}
-              />
-              <CategoryTag
-                dataValue="math"
-                onClick={onClickCategory}
-                text="math"
-                tag={tag}
-              />
-              <CategoryTag
-                dataValue="programming"
-                onClick={onClickCategory}
-                text="programming"
-                tag={tag}
-              />
-              <CategoryTag
-                dataValue="gaming"
-                onClick={onClickCategory}
-                text="gaming"
-                tag={tag}
-              />
-            </div>
-
-            {errors.title && (
-              <div style={{ color: "red" }}>{errors.title.message}</div>
-            )}
-            {errors.description && (
-              <div style={{ color: "red" }}>{errors.description.message}</div>
-            )}
             {errors.content_text && (
               <div style={{ color: "red" }}>{errors.content_text.message}</div>
             )}
+            <div className="categoryTag">
+              {TAGS.map((category) => (
+                <CategoryTag
+                  key={category}
+                  dataValue={category}
+                  onClick={onClickCategory}
+                  text={category}
+                  isSelectedTag={tags.includes(category)}
+                />
+              ))}
+            </div>
             <div className="modal-btn">
               <Button onClick={onClose} label="Close" type="type" width={180} />
               <Button onClick={onClick} label="Save" type="type" width={180} />

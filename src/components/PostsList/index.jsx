@@ -27,8 +27,7 @@ const PostsList = () => {
       {isLoading && <Loader />}
       {!isLoading && !posts?.length && <p>No posts found</p>}
       {!isLoading &&
-        posts?.length &&
-        posts.map(
+        posts?.map(
           (
             {
               title,

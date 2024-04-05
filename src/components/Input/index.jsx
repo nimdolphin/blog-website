@@ -8,9 +8,9 @@ const Input = React.forwardRef(
       type,
       value,
       onChange,
-      width = "100%",
-      height = "100%",
-      borderColor = "#dcdddf",
+      width = "100px",
+      height = "100px",
+      isError,
     },
     ref
   ) => {
@@ -20,7 +20,7 @@ const Input = React.forwardRef(
         style={{
           width: `${width}px`,
           height: `${height}px`,
-          borderColor: `${borderColor}`,
+          borderColor: isError ? "red" : "#dcdddf",
         }}
         type={type}
         placeholder={placeholder}
