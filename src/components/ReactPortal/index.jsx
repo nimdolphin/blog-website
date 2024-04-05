@@ -21,11 +21,7 @@ const ReactPortal = () => {
         type="submit"
         width={500}
       />
-      {showModal &&
-        createPortal(
-          <Modal onClose={onClose} />,
-          document.getElementById("modal-root")
-        )}
+      {showModal && createPortal(<Modal onClose={onClose} />, document.body)}
     </>
   );
 };

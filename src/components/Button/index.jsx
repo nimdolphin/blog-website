@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-const Button = ({ type, label, width = "100%", onClick }) => {
+const Button = ({ type, label, width = "100px", onClick }) => {
   return (
     <button
       className="btn"
