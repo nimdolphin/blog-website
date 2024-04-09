@@ -1,22 +1,19 @@
 import CategoryTag from "../CategoryTag";
 import { TAGS } from "../../data";
-import "./styles.scss";
 
-const Filter = ({ categoryState, onClickFilter }) => {
+const Filter = ({ selectedCategories, onClickFilter }) => {
   return (
-    <div className="filter">
-      <div className="categoryTag">
-        {TAGS.map((category) => (
-          <CategoryTag
-            className="tag"
-            key={category}
-            dataValue={category}
-            onClick={onClickFilter}
-            text={category}
-            isSelectedTag={categoryState.includes(category)}
-          />
-        ))}
-      </div>
+    <div className="categoryTag">
+      {TAGS.map((category) => (
+        <CategoryTag
+          className="tag"
+          key={category}
+          dataValue={category}
+          onClick={onClickFilter}
+          text={category}
+          isSelectedTag={selectedCategories.includes(category)}
+        />
+      ))}
     </div>
   );
 };

@@ -8,14 +8,14 @@ import Loader from "../Loader";
 
 const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryState, setCategory] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const onClickFilter = (event) => {
     const value = event.target.getAttribute("data-value");
-    if (categoryState.includes(value)) {
-      setCategory(categoryState.filter((tag) => tag !== value));
+    if (selectedCategories.includes(value)) {
+      setSelectedCategories(selectedCategories.filter((tag) => tag !== value));
     } else {
-      setCategory([...categoryState, value]);
+      setSelectedCategories([...selectedCategories, value]);
     }
   };
 
@@ -33,20 +33,22 @@ const PostsList = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const filteredPosts = posts?.filter(
-    (post) =>
-      categoryState.length === 0 || categoryState.includes(post.category)
+  const filteredPosts = posts?.filter((post) =>
+    selectedCategories.includes(post.category)
   );
 
   return (
     <>
-      <Filter onClickFilter={onClickFilter} categoryState={categoryState} />
+      <Filter
+        onClickFilter={onClickFilter}
+        selectedCategories={selectedCategories}
+      />
 
       <ul className="list-posts">
         {isLoading && <Loader />}
-        {!isLoading && !filteredPosts?.length && <p>No posts found</p>}
+        {!isLoading && !posts?.length && <p>No posts found</p>}
         {!isLoading &&
-          filteredPosts?.map(
+          (filteredPosts.length ? filteredPosts : posts)?.map(
             (
               {
                 title,
