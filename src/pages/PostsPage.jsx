@@ -1,6 +1,6 @@
 import AuthorInfo from "../components/AuthorInfo";
-import PostsList from "../components/PostsList";
 import Footer from "../components/Footer";
+import PostsList from "../components/PostsList";
 import ReactPortal from "../components/ReactPortal";
 
 const PostsPage = () => {

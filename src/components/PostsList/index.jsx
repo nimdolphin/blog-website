@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postsFetched } from "../../store/actions";
+import Filter from "../Filter";
 import axios from "axios";
 import Post from "../Post";
 import Loader from "../Loader";
 
 const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const onClickFilter = (event) => {
+    const value = event.target.getAttribute("data-value");
+    if (selectedCategories.includes(value)) {
+      setSelectedCategories(selectedCategories.filter((tag) => tag !== value));
+    } else {
+      setSelectedCategories([...selectedCategories, value]);
+    }
+  };
 
   const { posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -22,35 +33,46 @@ const PostsList = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const filteredPosts = posts?.filter((post) =>
+    selectedCategories.includes(post.category)
+  );
+
   return (
-    <ul className="list-posts">
-      {isLoading && <Loader />}
-      {!isLoading && !posts?.length && <p>No posts found</p>}
-      {!isLoading &&
-        posts?.map(
-          (
-            {
-              title,
-              category,
-              content_text,
-              created_at,
-              description,
-              photo_url,
-            },
-            idx
-          ) => (
-            <Post
-              key={idx}
-              title={title}
-              category={category}
-              contentText={content_text}
-              createdAt={created_at}
-              description={description}
-              photoUrl={photo_url}
-            />
-          )
-        )}
-    </ul>
+    <>
+      <Filter
+        onClickFilter={onClickFilter}
+        selectedCategories={selectedCategories}
+      />
+
+      <ul className="list-posts">
+        {isLoading && <Loader />}
+        {!isLoading && !posts?.length && <p>No posts found</p>}
+        {!isLoading &&
+          (filteredPosts.length ? filteredPosts : posts)?.map(
+            (
+              {
+                title,
+                category,
+                content_text,
+                created_at,
+                description,
+                photo_url,
+              },
+              idx
+            ) => (
+              <Post
+                key={idx}
+                title={title}
+                category={category}
+                contentText={content_text}
+                createdAt={created_at}
+                description={description}
+                photoUrl={photo_url}
+              />
+            )
+          )}
+      </ul>
+    </>
   );
 };
 

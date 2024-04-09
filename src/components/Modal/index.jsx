@@ -33,7 +33,6 @@ const Modal = ({ onClose, onClick }) => {
     } else {
       setTag([...tags, value]);
     }
-    console.log(value);
   };
 
   const onSubmit = (data) => {
