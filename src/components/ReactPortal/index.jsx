@@ -15,12 +15,14 @@ const ReactPortal = () => {
 
   return (
     <>
-      <Button
-        onClick={toggleModal}
-        label="Write a post"
-        type="submit"
-        width={500}
-      />
+      <div>
+        <Button
+          onClick={toggleModal}
+          label="Write a post"
+          type="submit"
+          width={500}
+        />
+      </div>
       {showModal && createPortal(<Modal onClose={onClose} />, document.body)}
     </>
   );

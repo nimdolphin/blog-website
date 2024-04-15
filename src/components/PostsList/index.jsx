@@ -29,6 +29,7 @@ const PostsList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     axios
       .get(
