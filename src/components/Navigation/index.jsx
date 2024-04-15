@@ -12,9 +12,6 @@ const Navigation = () => {
         <Link to={PATHS.POSTS} className="navbar-item">
           Posts
         </Link>
-        <Link to={PATHS.NESTED_POST} className="navbar-item">
-          Post
-        </Link>
         <Link to={PATHS.LOGIN} className="navbar-item">
           Log In
         </Link>

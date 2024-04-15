@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { postsFetched } from "../../store/actions";
 import Filter from "../Filter";
 import axios from "axios";
@@ -9,6 +10,11 @@ import Loader from "../Loader";
 const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const navigate = useNavigate();
+  const handleNavigation = (id) => () => {
+    navigate(`post/${id}`);
+  };
 
   const onClickFilter = (event) => {
     const value = event.target.getAttribute("data-value");
@@ -23,6 +29,7 @@ const PostsList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     axios
       .get(
@@ -51,6 +58,7 @@ const PostsList = () => {
           (filteredPosts.length ? filteredPosts : posts)?.map(
             (
               {
+                id,
                 title,
                 category,
                 content_text,
@@ -68,6 +76,7 @@ const PostsList = () => {
                 createdAt={created_at}
                 description={description}
                 photoUrl={photo_url}
+                onClick={handleNavigation(id)}
               />
             )
           )}

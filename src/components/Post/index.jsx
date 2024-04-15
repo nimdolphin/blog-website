@@ -9,9 +9,10 @@ const Post = ({
   createdAt,
   description,
   photoUrl,
+  onClick,
 }) => {
   return (
-    <li className="list-item">
+    <li className="list-item" onClick={onClick}>
       <img className="post-photo" src={photoUrl ?? PhotoNull} alt="postPhoto" />
       <h1 className="title">{title}</h1>
       <p className="description">{description}</p>
