@@ -6,14 +6,21 @@ import Filter from "../Filter";
 import axios from "axios";
 import Post from "../Post";
 import Loader from "../Loader";
+import Pagination from "../Pagination";
 
 const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
 
   const navigate = useNavigate();
   const handleNavigation = (id) => () => {
     navigate(`post/${id}`);
+  };
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   const onClickFilter = (event) => {
@@ -23,6 +30,7 @@ const PostsList = () => {
     } else {
       setSelectedCategories([...selectedCategories, value]);
     }
+    setCurrentPage(1);
   };
 
   const { posts } = useSelector((state) => state.posts);
@@ -44,6 +52,16 @@ const PostsList = () => {
     selectedCategories.includes(post.category)
   );
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentFilterPost = filteredPosts.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+  console.log(currentPost);
+  console.log(currentFilterPost);
+
   return (
     <>
       <Filter
@@ -55,7 +73,7 @@ const PostsList = () => {
         {isLoading && <Loader />}
         {!isLoading && !posts?.length && <p>No posts found</p>}
         {!isLoading &&
-          (filteredPosts.length ? filteredPosts : posts)?.map(
+          (filteredPosts.length ? currentFilterPost : currentPost)?.map(
             (
               {
                 id,
@@ -81,6 +99,14 @@ const PostsList = () => {
             )
           )}
       </ul>
+      <Pagination
+        postPerPage={postsPerPage}
+        currentPage={currentPage}
+        totalPosts={
+          filteredPosts.length > 0 ? filteredPosts.length : posts.length
+        }
+        handlePagination={handlePagination}
+      />
     </>
   );
 };
