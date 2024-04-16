@@ -21,6 +21,7 @@ const PostsList = () => {
 
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
   };
 
   const onClickFilter = (event) => {
