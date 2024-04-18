@@ -7,24 +7,21 @@ const Pagination = ({
   totalPosts,
   handlePagination,
 }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const pageNumbers = Math.ceil(totalPosts / postPerPage);
 
   return (
     <div className="pagination">
-      {pageNumbers.map((pageNumber) => (
-        <Button
-          backgroundColor={currentPage === pageNumber ? "#696a75" : "#4b6bfb"}
-          key={pageNumber}
-          label={pageNumber}
-          width={25}
-          type="button"
-          onClick={() => handlePagination(pageNumber)}
-        />
-      ))}
+      {Array.from({ length: pageNumbers }, (_, i) => i + 1).map(
+        (pageNumber) => (
+          <Button
+            className={currentPage === pageNumber ? "active" : ""}
+            key={pageNumber}
+            label={pageNumber}
+            width={25}
+            onClick={() => handlePagination(pageNumber)}
+          />
+        )
+      )}
     </div>
   );
 };

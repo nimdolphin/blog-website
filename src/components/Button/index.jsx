@@ -1,13 +1,18 @@
 import "./styles.scss";
 
-const Button = ({ type, label, width = "100px", onClick, backgroundColor }) => {
+const Button = ({
+  type = "button",
+  label,
+  width = "100px",
+  onClick,
+  className,
+}) => {
   return (
     <button
-      className="btn"
+      className={`btn ${className}`}
       type={type}
       style={{
         width: `${width}px`,
-        backgroundColor: `${backgroundColor}`,
       }}
       onClick={onClick}
     >
