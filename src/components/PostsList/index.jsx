@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postsFetched } from "../../store/actions";
 import { getPaginatedPosts } from "../../utils/data";
-import { POSTS_PER_PAGE } from "../../data";
 import Filter from "../Filter";
 import axios from "axios";
 import Post from "../Post";
@@ -56,7 +55,6 @@ const PostsList = () => {
 
   const { currentPost, currentFilterPost } = getPaginatedPosts(
     currentPage,
-    POSTS_PER_PAGE,
     posts,
     filteredPosts
   );
@@ -99,7 +97,6 @@ const PostsList = () => {
           )}
       </ul>
       <Pagination
-        postPerPage={POSTS_PER_PAGE}
         currentPage={currentPage}
         totalPosts={
           filteredPosts.length > 0 ? filteredPosts.length : posts.length
