@@ -2,18 +2,26 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postsFetched } from "../../store/actions";
+import { getPaginatedPosts } from "../../utils/data";
 import Filter from "../Filter";
 import axios from "axios";
 import Post from "../Post";
 import Loader from "../Loader";
+import Pagination from "../Pagination";
 
 const PostsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
   const handleNavigation = (id) => () => {
     navigate(`post/${id}`);
+  };
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
   };
 
   const onClickFilter = (event) => {
@@ -23,6 +31,7 @@ const PostsList = () => {
     } else {
       setSelectedCategories([...selectedCategories, value]);
     }
+    setCurrentPage(1);
   };
 
   const { posts } = useSelector((state) => state.posts);
@@ -44,6 +53,12 @@ const PostsList = () => {
     selectedCategories.includes(post.category)
   );
 
+  const { currentPost, currentFilterPost } = getPaginatedPosts(
+    currentPage,
+    posts,
+    filteredPosts
+  );
+
   return (
     <>
       <Filter
@@ -55,7 +70,7 @@ const PostsList = () => {
         {isLoading && <Loader />}
         {!isLoading && !posts?.length && <p>No posts found</p>}
         {!isLoading &&
-          (filteredPosts.length ? filteredPosts : posts)?.map(
+          (filteredPosts.length ? currentFilterPost : currentPost)?.map(
             (
               {
                 id,
@@ -81,6 +96,13 @@ const PostsList = () => {
             )
           )}
       </ul>
+      <Pagination
+        currentPage={currentPage}
+        totalPosts={
+          filteredPosts.length > 0 ? filteredPosts.length : posts.length
+        }
+        handlePagination={handlePagination}
+      />
     </>
   );
 };
