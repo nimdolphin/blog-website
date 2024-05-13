@@ -71,20 +71,18 @@ const PostsList = () => {
         {!isLoading && !posts?.length && <p>No posts found</p>}
         {!isLoading &&
           (filteredPosts.length ? currentFilterPost : currentPost)?.map(
-            (
-              {
-                id,
-                title,
-                category,
-                content_text,
-                created_at,
-                description,
-                photo_url,
-              },
-              idx
-            ) => (
+            ({
+              id,
+              title,
+              category,
+              content_text,
+              created_at,
+              description,
+              photo_url,
+            }) => (
               <Post
-                key={idx}
+                key={id}
+                id={id}
                 title={title}
                 category={category}
                 contentText={content_text}

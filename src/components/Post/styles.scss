@@ -6,14 +6,47 @@
   flex-wrap: wrap;
 
   .list-item {
+    position: relative;
     border: 1px solid rgb(239, 239, 243);
     border-radius: 6px;
     padding: 12px;
     margin: 15px;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover .post-photo {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &:hover {
+      button {
+        opacity: 1;
+        visibility: visible;
+        background-color: transparent;
+        border: solid;
+        border-radius: 40px;
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        align-items: center;
+        z-index: 2;
+      }
+    }
 
     .post-photo {
       width: 360px;
       border-radius: 6px;
+      opacity: 50%;
+      transition: transform 0.45s;
     }
 
     .title {
