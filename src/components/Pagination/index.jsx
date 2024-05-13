@@ -1,13 +1,8 @@
 import Button from "../Button";
-import "./styles.scss";
 import { POSTS_PER_PAGE } from "../../data";
+import "./styles.scss";
 
-const Pagination = ({
-  postPerPage,
-  currentPage,
-  totalPosts,
-  handlePagination,
-}) => {
+const Pagination = ({ currentPage, totalPosts, handlePagination }) => {
   const pageNumbers = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
   return (
